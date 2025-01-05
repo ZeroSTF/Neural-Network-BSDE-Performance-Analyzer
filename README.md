@@ -37,8 +37,8 @@ The analyzer provides comprehensive performance metrics including:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/option-pricing-analyzer.git
-cd option-pricing-analyzer
+git clone https://github.com/yourusername/Neural-Network-BSDE-Performance-Analyzer.git
+cd Neural-Network-BSDE-Performance-Analyzer
 ```
 
 2. Create a virtual environment (recommended):
