@@ -1,40 +1,118 @@
-Ce premier graphique illustre la comparaison des prix d'options calculés par différentes méthodes en fonction de la dimension.
+# Option Pricing Methods Performance Analyzer
 
-Points clés à souligner :
+## Description
 
-- La méthode BSDE-DNN maintient une stabilité relative même en haute dimension
-- La méthode Longstaff-Schwartz montre une déviation croissante avec la dimension
-- Les différences de prix deviennent plus prononcées au-delà de 10 dimensions
-- La méthode des différences finies n'est applicable qu'en basse dimension
+This project implements and compares different numerical methods for pricing options in multiple dimensions. It includes three main approaches:
 
-Cette comparaison démontre l'avantage principal de l'approche par réseaux de neurones : sa capacité à gérer efficacement les problèmes en haute dimension."
+- BSDE-DNN (Backward Stochastic Differential Equations with Deep Neural Networks)
+- Longstaff-Schwartz Method
+- Finite Difference Method
 
-Le deuxième graphique présente l'analyse des temps de calcul en échelle logarithmique.
+The analyzer provides comprehensive performance metrics including:
 
-Points essentiels :
+- Price accuracy across different dimensions (2D to 100D)
+- Computation time analysis
+- Greeks calculations
+- Numerical stability analysis
+- Error analysis with confidence intervals
 
-- L'axe vertical en échelle logarithmique montre la croissance exponentielle du temps de calcul
-- La méthode BSDE-DNN montre une meilleure scalabilité en haute dimension
-- Les méthodes traditionnelles (Longstaff-Schwartz, différences finies) deviennent prohibitives au-delà de certaines dimensions
-- Le compromis temps/précision est particulièrement favorable pour BSDE-DNN en dimensions élevées
+## Features
 
-Cette analyse démontre clairement l'efficacité computationnelle de notre approche par rapport aux méthodes classiques."
+- Multi-dimensional option pricing up to 100 dimensions
+- Correlated asset path generation
+- Greeks calculation (Delta, Gamma, Theta, Vega, Rho)
+- Visualization of results using matplotlib and seaborn
+- Performance benchmarking across methods
+- Stability analysis with confidence intervals
 
-Le troisième graphique présente l'analyse de l'erreur relative en pourcentage.
+## Installation
 
-Points à mettre en avant :
+### Prerequisites
 
-- L'erreur est calculée par rapport à une solution de référence (Black-Scholes en 1D)
-- La stabilité de l'erreur pour BSDE-DNN même en haute dimension
-- L'augmentation progressive de l'erreur pour Longstaff-Schwartz
-- La limitation des méthodes traditionnelles visible par leur erreur croissante
+- Python 3.12
+- CUDA-capable GPU (optional, for faster DNN training)
 
-Cette analyse confirme la robustesse de notre approche BSDE-DNN, particulièrement importante pour les applications pratiques."
+### Setup
 
-En synthèse, ces résultats démontrent trois avantages majeurs de notre approche BSDE-DNN :
+1. Clone the repository:
 
-1. Une précision stable même en haute dimension
-2. Un temps de calcul plus favorable que les méthodes traditionnelles
-3. Une robustesse accrue face à l'augmentation de la dimensionnalité
+```bash
+git clone https://github.com/yourusername/option-pricing-analyzer.git
+cd option-pricing-analyzer
+```
 
-Ces caractéristiques sont particulièrement pertinentes pour les applications réelles en finance, où la rapidité et la précision sont cruciales.
+2. Create a virtual environment (recommended):
+
+```bash
+python -m venv venv
+\venv\Scripts\activate
+```
+
+3. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+### Running the Analysis
+
+To run the complete analysis:
+
+```bash
+python main.py
+```
+
+This will generate several plots:
+
+- Price comparison across dimensions
+- Computation time analysis
+- Greeks visualization
+- Stability analysis
+- Error analysis with confidence intervals
+
+### Customizing Parameters
+
+You can modify the base parameters in the `PerformanceAnalyzer` class:
+
+- Initial stock price (S0)
+- Strike price (K)
+- Risk-free rate (r)
+- Volatility (sigma)
+- Time to maturity (T)
+- Number of time steps
+- Number of simulation paths
+
+### Example Code
+
+```python
+analyzer = PerformanceAnalyzer()
+
+# Run comprehensive analysis
+analyzer.comprehensive_analysis()
+
+# Run specific analyses
+stability_results = analyzer.analyze_stability(n_trials=10)
+precision_results, timing_results = analyzer.test_precision()
+```
+
+## Output
+
+The analysis generates several visualizations:
+
+1. Price comparison plot showing option prices across dimensions for each method
+2. Computation time plot (log scale) showing scalability
+3. Bar plot of Greeks values
+4. Stability analysis plot with error bars
+5. Relative error analysis plot with confidence intervals
+
+## Notes
+
+- The Finite Difference method is currently implemented only for 2D cases
+- BSDE-DNN training parameters can be adjusted in the `_test_bsde_dnn` method
+- GPU acceleration is automatically used if available
+
+## Contributing
+
+Feel free to submit issues, fork the repository, and create pull requests for any improvements.
